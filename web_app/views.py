@@ -15,6 +15,8 @@ class Index(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pay_cycle = PayCycle.objects.order_by('-start_date').first()
+        if not pay_cycle:
+            return context
         cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle)
         total_expenses = sum([cycle.amount for cycle in cycle_expenses])
         context['money_left'] = pay_cycle.pay_amount - total_expenses
