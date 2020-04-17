@@ -4,4 +4,7 @@ from web_app import views
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
+    path('update-expense/', views.UpdateExpense.as_view(), name='update-expense'),
+    path('delete-expense/<pk>', views.DeleteExpense.as_view(), name='delete-expense'),
+    path('new-expense', views.NewExpense.as_view(), name='new-expense'),
 ]

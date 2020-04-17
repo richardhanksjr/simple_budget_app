@@ -2,4 +2,28 @@
 
 {% block content %}
     <h2 class="text-muted">Current amount left to spend this pay period: </h2><h1 class="text-dark">---{{ money_left }}---</h1>
+        <hr>
+    <h2>Add New Expense</h2>
+    <form method="post" action="{% url 'new-expense' %}">
+        {%  csrf_token %}
+        <input type="number" placeholder="1.0" step="0.01" min="0" name="amount" value="0.00">
+        <input type="submit" value="Add New Expense">
+    </form>
+    <br><br>
+    <hr>
+    <ul class="list-group">
+        {%  for expense in cycle_expenses %}
+            <li class="list-group-item list-group-item-action">
+{#                <a href="{% url 'update-expense' pk=expense.pk %}">Update</a>#}
+                <form method="post" action="{% url 'update-expense' %}">
+                    {%  csrf_token %}
+                    <input type="number" placeholder="1.0" step="0.01" min="0" name="amount" value="{{  expense.amount }}">
+                    <input type="hidden" name="pk" value="{{ expense.pk }}">
+                    <input type="submit" value="Update Expense">
+                </form>
+                <a href="{% url 'delete-expense' expense.pk %}" onclick="return confirm('Are you sure you want to delete this expense?');">Delete Expense</a>
+            </li>
+        {% endfor %}
+    </ul>
+
 {%  endblock %}

@@ -11,6 +11,13 @@
 <body>
 
 <div class="container text-center">
+    {%  if messages %}
+        <ul class="list-group">
+            {%  for message in messages %}
+                <li class="list-group-item alert alert-success">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <h1>Money Tracker</h1>
     {% block content %}
     {% endblock %}
