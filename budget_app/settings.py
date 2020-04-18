@@ -125,3 +125,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = "index"
+
+# TEN YEARS aka, don't log out since I'm the only user!
+SESSION_COOKIE_AGE = 31536000 * 10

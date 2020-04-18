@@ -17,10 +17,12 @@ class Index(LoginRequiredMixin, TemplateView):
         pay_cycle = PayCycle.objects.order_by('-start_date').first()
         if not pay_cycle:
             return context
-        cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle)
+        cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle).order_by('-date_created')
         total_expenses = sum([cycle.amount for cycle in cycle_expenses])
         context['money_left'] = pay_cycle.pay_amount - total_expenses
         context['cycle_expenses'] = cycle_expenses
+        context['expense_types'] = Expense.EXPENSE_TYPE_CHOICES
+        context['payment_types'] = Expense.PAYMENT_TYPE_CHOICES
         return context
 
 
@@ -51,7 +53,9 @@ class DeleteExpense(View):
 class NewExpense(View):
     def post(self, request, *args, **kwargs):
         amount = request.POST.get('amount')
+        expense_type = request.POST.get('expense_type')
+        payment_type = request.POST.get('payment_type')
         pay_cycle = PayCycle.objects.order_by('-start_date').first()
-        new_expense = Expense.objects.create(amount=amount, pay_cycle=pay_cycle)
+        Expense.objects.create(amount=amount, pay_cycle=pay_cycle, expense_type=expense_type, payment_type=payment_type)
         messages.add_message(request, messages.INFO, 'Expense successfully added!')
         return HttpResponseRedirect('/')

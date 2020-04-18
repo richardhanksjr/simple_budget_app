@@ -1,13 +1,28 @@
 {%  extends 'web_app/base.html' %}
 
 {% block content %}
-    <h2 class="text-muted">Current amount left to spend this pay period: </h2><h1 class="text-dark">---{{ money_left }}---</h1>
+    {%  if money_left > 50  %}
+<h2 class="text-dark jumbotron bg-success">${{ money_left }}</h2>
+    {% else %}
+    <h2 class="text-dark jumbotron bg-danger">${{ money_left }}</h2>
+{% endif %}
         <hr>
-    <h2>Add New Expense</h2>
     <form method="post" action="{% url 'new-expense' %}">
         {%  csrf_token %}
-        <input type="number" placeholder="1.0" step="0.01" min="0" name="amount" value="0.00">
-        <input type="submit" value="Add New Expense">
+            <select name="expense_type">
+              {% for value, text in expense_types %}
+                  <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
+              {% endfor %}
+            </select>
+            <select name="payment_type">
+                {% for value, text in payment_types %}
+                    <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
+                {% endfor %}
+            </select>
+                <input class="form-control" type="number" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
+                <input class="btn btn-info form-control" type="submit" value="Add New Expense">
+            </div>
+        </div>
     </form>
     <br><br>
     <hr>
@@ -15,13 +30,24 @@
         {%  for expense in cycle_expenses %}
             <li class="list-group-item list-group-item-action">
 {#                <a href="{% url 'update-expense' pk=expense.pk %}">Update</a>#}
-                <form method="post" action="{% url 'update-expense' %}">
+                <form  method="post" action="{% url 'update-expense' %}">
                     {%  csrf_token %}
-                    <input type="number" placeholder="1.0" step="0.01" min="0" name="amount" value="{{  expense.amount }}">
-                    <input type="hidden" name="pk" value="{{ expense.pk }}">
-                    <input type="submit" value="Update Expense">
+                    <div class="form-group">
+                        <div class="form-text">{{ expense.date_created }}</div>
+                        <div class="form-text">{{ expense.get_expense_type_display }}</div>
+                        <div class="form-text">{{ expense.get_payment_type_display }}</div>
+                        <input type="hidden" name="pk" value="{{ expense.pk }}">
+                        <input class="form-control" type="number" placeholder="{{ expense.amount }}" step="0.01" min="0" name="amount" required>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-info form-control" type="submit" value="Update Expense">
+                         <a class="btn btn-danger form-control mt-1" href="{% url 'delete-expense' expense.pk %}" onclick="return confirm('Are you sure you want to delete this expense?');">Delete Expense</a>
+                    </div>
+
+
                 </form>
-                <a href="{% url 'delete-expense' expense.pk %}" onclick="return confirm('Are you sure you want to delete this expense?');">Delete Expense</a>
             </li>
         {% endfor %}
     </ul>
