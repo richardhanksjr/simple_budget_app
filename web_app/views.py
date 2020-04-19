@@ -1,3 +1,5 @@
+from datetime import date
+import calendar
 from django.views.generic import TemplateView
 from django.views import View
 from django.http import HttpResponseRedirect, Http404
@@ -12,6 +14,22 @@ class Index(LoginRequiredMixin, TemplateView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
 
+    def _compute_money_color(self, total_expenses, pay_cycle):
+
+        today_date = date.today()
+        day_of_month = today_date.day
+        num_days_in_current_month = calendar.monthrange(today_date.year, today_date.month)[1]
+        days_in_current_cycle = 15 if day_of_month <= 15 else num_days_in_current_month - 15
+        day_of_cycle = day_of_month % days_in_current_cycle
+        amount_per_day = pay_cycle.pay_amount / (num_days_in_current_month / 2)
+        total_expected_to_date = day_of_cycle * amount_per_day
+        percentage_of_expected = total_expenses / total_expected_to_date
+        if percentage_of_expected <= 1:
+            return "GREEN"
+        elif percentage_of_expected > 1.5:
+            return "RED"
+        return "YELLOW"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pay_cycle = PayCycle.objects.order_by('-start_date').first()
@@ -23,6 +41,7 @@ class Index(LoginRequiredMixin, TemplateView):
         context['cycle_expenses'] = cycle_expenses
         context['expense_types'] = Expense.EXPENSE_TYPE_CHOICES
         context['payment_types'] = Expense.PAYMENT_TYPE_CHOICES
+        context['money_color'] = self._compute_money_color(total_expenses, pay_cycle)
         return context
 
 

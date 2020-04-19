@@ -1,10 +1,13 @@
 {%  extends 'web_app/base.html' %}
 
 {% block content %}
-    {%  if money_left > 50  %}
+    {%  if money_color == 'GREEN'  %}
 <h2 class="text-dark jumbotron bg-success">${{ money_left }}</h2>
-    {% else %}
+    {% elif money_color == 'RED' %}
     <h2 class="text-dark jumbotron bg-danger">${{ money_left }}</h2>
+    {%  else %}
+        <h2 class="text-dark jumbotron bg-warning">${{ money_left }}</h2>
+
 {% endif %}
         <hr>
     <form method="post" action="{% url 'new-expense' %}">
