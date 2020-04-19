@@ -22,7 +22,7 @@
                     <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
                 {% endfor %}
             </select>
-                <input class="form-control" type="number" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
+                <input class="form-control" type="tel" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
                 <input class="btn btn-info form-control" type="submit" value="Add New Expense">
             </div>
         </div>
@@ -40,7 +40,7 @@
                         <div class="form-text">{{ expense.get_expense_type_display }}</div>
                         <div class="form-text">{{ expense.get_payment_type_display }}</div>
                         <input type="hidden" name="pk" value="{{ expense.pk }}">
-                        <input class="form-control" type="number" placeholder="{{ expense.amount }}" step="0.01" min="0" name="amount" required>
+                        <input class="form-control" type="tel" placeholder="{{ expense.amount }}" step="0.01" min="0" name="amount" required>
 
                     </div>
 
