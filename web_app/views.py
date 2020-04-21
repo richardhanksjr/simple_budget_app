@@ -78,3 +78,17 @@ class NewExpense(View):
         Expense.objects.create(amount=amount, pay_cycle=pay_cycle, expense_type=expense_type, payment_type=payment_type)
         messages.add_message(request, messages.INFO, 'Expense successfully added!')
         return HttpResponseRedirect('/')
+
+
+class AddCredit(View):
+    def post(self, request, *args, **kwargs):
+        """
+        Take a given amount and add it to the current/initial value of the pay_cycle.  In other words,
+        we are treating a credit like we had more money to begin with than we initially did.
+        """
+        credit_amount = request.POST.get('amount')
+        pay_cycle = PayCycle.objects.order_by('-start_date').first()
+        pay_cycle.pay_amount = pay_cycle.pay_amount + float(credit_amount)
+        pay_cycle.save()
+        messages.add_message(request, messages.INFO, 'Credit successfully added!')
+        return HttpResponseRedirect('/')
