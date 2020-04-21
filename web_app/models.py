@@ -14,7 +14,7 @@ class Expense(models.Model):
         ('red_card', 'Red Card'),
         ('amazon_card', 'Amazon Card'),
         ('greed_card', 'Green Card'),
-        ('other', 'other'),
+        ('other', 'Other'),
     ]
 
     EXPENSE_TYPE_CHOICES = [
@@ -28,6 +28,8 @@ class Expense(models.Model):
         ('entertainment', 'Entertainment'),
         ('drinks', "Drinks"),
         ('dogs', 'Dogs'),
+        ('medical', 'Medical'),
+        ('other', 'Other')
     ]
     date_created = models.DateTimeField(auto_now_add=True)
     amount = models.FloatField(null=False)
