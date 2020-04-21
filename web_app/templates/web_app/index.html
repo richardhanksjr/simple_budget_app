@@ -2,11 +2,11 @@
 
 {% block content %}
     {%  if money_color == 'GREEN'  %}
-<h2 class="text-dark jumbotron bg-success">${{ money_left }}</h2>
+        <div class="text-dark jumbotron bg-success money-left"><h2>${{ money_left }}</h2></div>
     {% elif money_color == 'RED' %}
-    <h2 class="text-dark jumbotron bg-danger">${{ money_left }}</h2>
+        <div class="text-dark jumbotron bg-danger money-left"><h2>${{ money_left }}</h2></div>
     {%  else %}
-        <h2 class="text-dark jumbotron bg-warning">${{ money_left }}</h2>
+        <div class="text-dark jumbotron bg-warning money-left"><h2>${{ money_left }}</h2></div>
 
 {% endif %}
         <hr>

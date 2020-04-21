@@ -5,6 +5,9 @@ body {
 
 .header{
     font-family: 'Pacifico', cursive;
-    margin-top: 2em;
-    margin-bottom: 2em;
+
+}
+
+.money-left{
+    margin-top: 4em;
 }
