@@ -2,9 +2,8 @@ from datetime import date
 import calendar
 from django.views.generic import TemplateView
 from django.views import View
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from web_app.models import PayCycle, Expense
 
@@ -92,3 +91,12 @@ class AddCredit(View):
         pay_cycle.save()
         messages.add_message(request, messages.INFO, 'Credit successfully added!')
         return HttpResponseRedirect('/')
+
+
+class ExpensePieChart(View):
+    def get(self, request):
+        pay_cycle = PayCycle.objects.order_by('-start_date').first()
+        cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle)
+        # values = ['data': {}]
+
+        return JsonResponse({'key': 'value'})
