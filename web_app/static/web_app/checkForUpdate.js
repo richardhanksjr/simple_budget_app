@@ -57,29 +57,29 @@
 //     new_expense_input.val(value);
 // });
 
-// $('.new-expense-input').on('keyup', function(){
-//     let numNoDecimal = $('.new-expense-input').val().toString().replace('.', '');
-//     let stringNoLeadingZeros = numNoDecimal;
-//     for (let i=0; i < stringNoLeadingZeros.length; i){
-//         if (stringNoLeadingZeros.charAt(i) == '0'){
-//             stringNoLeadingZeros = stringNoLeadingZeros.substring(1);
-//
-//         }else{
-//             break;
-//         }
-//     }
-//
-//     if (stringNoLeadingZeros.length == 1){
-//         stringNoLeadingZeros = "0.0" + stringNoLeadingZeros;
-//     }else if (stringNoLeadingZeros.length == 2){
-//         stringNoLeadingZeros = "0." + stringNoLeadingZeros;
-//     }else{
-//         console.log(stringNoLeadingZeros.substring(0, stringNoLeadingZeros.length - 2));
-//         stringNoLeadingZeros = stringNoLeadingZeros.substring(0, stringNoLeadingZeros.length - 2) + "." + stringNoLeadingZeros.substring(stringNoLeadingZeros.length - 2);
-//
-//     }
-//     $('.new-expense-input').val(parseFloat(stringNoLeadingZeros));
-// });
+$('.new-expense-input').on('keyup', function(){
+    let numNoDecimal = $('.new-expense-input').val().toString().replace('.', '');
+    let stringNoLeadingZeros = numNoDecimal;
+    for (let i=0; i < stringNoLeadingZeros.length; i){
+        if (stringNoLeadingZeros.charAt(i) == '0'){
+            stringNoLeadingZeros = stringNoLeadingZeros.substring(1);
+
+        }else{
+            break;
+        }
+    }
+
+    if (stringNoLeadingZeros.length == 1){
+        stringNoLeadingZeros = "0.0" + stringNoLeadingZeros;
+    }else if (stringNoLeadingZeros.length == 2){
+        stringNoLeadingZeros = "0." + stringNoLeadingZeros;
+    }else{
+        console.log(stringNoLeadingZeros.substring(0, stringNoLeadingZeros.length - 2));
+        stringNoLeadingZeros = stringNoLeadingZeros.substring(0, stringNoLeadingZeros.length - 2) + "." + stringNoLeadingZeros.substring(stringNoLeadingZeros.length - 2);
+
+    }
+    $('.new-expense-input').val(parseFloat(stringNoLeadingZeros));
+});
 
 // $('.update-expense-input').on('keyup', function(){
 //     let numNoDecimal = $('.update-expense-input').val().toString().replace('.', '');
