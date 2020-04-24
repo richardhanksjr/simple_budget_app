@@ -2,11 +2,11 @@
 
 {% block content %}
     {%  if money_color == 'GREEN'  %}
-        <div class="text-dark jumbotron bg-success money-left"><h2>${{ money_left }}</h2></div>
+        <div class="text-dark jumbotron bg-success money-left"><h2>${{ money_left|floatformat:2 }}</h2></div>
     {% elif money_color == 'RED' %}
-        <div class="text-dark jumbotron bg-danger money-left"><h2>${{ money_left }}</h2></div>
+        <div class="text-dark jumbotron bg-danger money-left"><h2>${{ money_left|floatformat:2 }}</h2></div>
     {%  else %}
-        <div class="text-dark jumbotron bg-warning money-left"><h2>${{ money_left }}</h2></div>
+        <div class="text-dark jumbotron bg-warning money-left"><h2>${{ money_left|floatformat:2 }}</h2></div>
 
 {% endif %}
         <hr>
@@ -14,7 +14,7 @@
         {%  csrf_token %}
             <select name="expense_type">
               {% for value, text in expense_types %}
-                  <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
+                  <option class="dropdown-item" value="{{ value}}">{{ text }}</option>
               {% endfor %}
             </select>
             <select name="payment_type">
@@ -22,7 +22,7 @@
                     <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
                 {% endfor %}
             </select>
-                <input class="form-control mt-2 mb-2" type="number" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
+                <input class="form-control mt-2 mb-2 new-expense-input" type="tel" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
                 <input class="btn btn-success form-control" type="submit" value="Add New Expense">
             </div>
 {#        </div>#}
@@ -40,7 +40,7 @@
                         <div class="form-text">{{ expense.get_expense_type_display }}</div>
                         <div class="form-text">{{ expense.get_payment_type_display }}</div>
                         <input type="hidden" name="pk" value="{{ expense.pk }}">
-                        <input class="form-control" type="number" placeholder="{{ expense.amount }}" step="0.01" min="0" name="amount" required>
+                        <input class="form-control" type="number" placeholder="{{ expense.amount|floatformat:2 }}" step="0.01" min="0" name="amount" required>
 
                     </div>
 
