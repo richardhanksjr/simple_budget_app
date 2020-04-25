@@ -97,6 +97,13 @@ class ExpensePieChart(View):
     def get(self, request):
         pay_cycle = PayCycle.objects.order_by('-start_date').first()
         cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle)
-        # values = ['data': {}]
+        # labels: ['Groceries', 'Takeout Food', 'Gas', 'Clothes', 'Baby Stuff', 'Toiletries', "Car or House",
+        #          'Entertainment', 'Drinks', 'Dogs', 'Medical', 'Other']
+        grocery_expenses = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'groceries'])
+        takeout_expenses = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'take_out_food'])
+        gas_expenses = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'gas'])
+        clothes = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'clothes']),
+        baby_stuff = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'baby_stuff'])
+        values = [grocery_expenses, takeout_expenses, gas_expenses, clothes, baby_stuff]
 
-        return JsonResponse({'key': 'value'})
+        return JsonResponse(values, safe=False)
