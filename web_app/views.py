@@ -104,6 +104,16 @@ class ExpensePieChart(View):
         gas_expenses = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'gas'])
         clothes = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'clothes']),
         baby_stuff = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'baby_stuff'])
-        values = [grocery_expenses, takeout_expenses, gas_expenses, clothes, baby_stuff]
+        toiletries = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'toiletries'])
+        car_or_house = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'car_house'])
+        entertainment = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'entertainment'])
+        drinks = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'drinks'])
+        dogs = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'dogs'])
+        medical = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'medical'])
+        other = sum([expense.amount for expense in cycle_expenses if expense.expense_type == 'other'])
+
+        values = [grocery_expenses, takeout_expenses, gas_expenses, clothes, baby_stuff, toiletries, car_or_house,
+                  entertainment, drinks, dogs, medical, other]
+
 
         return JsonResponse(values, safe=False)
