@@ -22,7 +22,11 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <div class="header navbar fixed-top navbar-dark bg-info"><h2 class="text-white">Money Tracker</h2></div>
+    <div class="header navbar fixed-top navbar-dark bg-info">
+        <h2 class="text-white">Money Tracker</h2>
+            <button id="myBtn" class="text-white">Expense Chart</button>
+        <div class="modal" id="myModal"><span class="close">X</span><canvas class="modal-content" id="myChart" width="400" height="400"></canvas></div>
+    </div>
     <div class="container">
     {% block content %}
     {% endblock %}
