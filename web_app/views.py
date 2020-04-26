@@ -21,13 +21,21 @@ class Index(LoginRequiredMixin, TemplateView):
         days_in_current_cycle = 15 if day_of_month <= 15 else num_days_in_current_month - 15
         day_of_cycle = day_of_month % days_in_current_cycle
         amount_per_day = pay_cycle.pay_amount / (num_days_in_current_month / 2)
-        total_expected_to_date = day_of_cycle * amount_per_day
-        percentage_of_expected = total_expenses / total_expected_to_date
-        if percentage_of_expected <= 1:
-            return "GREEN"
-        elif percentage_of_expected > 1.5:
-            return "RED"
-        return "YELLOW"
+        total_expected_remaining = pay_cycle.pay_amount - (day_of_cycle * amount_per_day)
+        print(total_expected_remaining)
+        print(total_expenses)
+        if total_expected_remaining <= pay_cycle.pay_amount - total_expenses:
+            return 'GREEN'
+        elif total_expected_remaining * .75<= (pay_cycle.pay_amount - total_expenses):
+            return 'YELLOW'
+        return 'RED'
+        # total_expected_to_date = day_of_cycle * amount_per_day
+        #         # percentage_of_expected = total_expenses / total_expected_to_date
+        #         # if percentage_of_expected <= 1:
+        #         #     return "GREEN"
+        #         # elif percentage_of_expected > 1.5:
+        #         #     return "RED"
+        #         # return "YELLOW"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
