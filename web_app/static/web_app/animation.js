@@ -10,10 +10,15 @@
  * License: cssanimattion is licensed under the MIT license
  **/
 
-window.onload = function() {
+// window.addEvent("load", function() {
+//     animateSequence();
+//     animateRandom();
+// }, false);
+window.addEventListener("load", function() {
+    console.log("animation");
     animateSequence();
     animateRandom();
-};
+}, true);
 
 function animateSequence() {
     var a = document.getElementsByClassName('sequence');

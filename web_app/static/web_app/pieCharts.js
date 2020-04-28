@@ -1,7 +1,6 @@
-window.onload = function(){
+document.addEventListener("load", function(){
     $.get('/expense-pie-chart')
     .done(function(data){
-
         var ctx = document.getElementById('myChart').getContext('2d');
         var pieChart = new Chart(ctx, {
         type: 'pie',
@@ -102,7 +101,7 @@ window.onload = function(){
             var expenseChart = new Chart(ctx2, config);
         })
 
-};
+}, true);
 
 // <script>
 // let data = []
@@ -185,13 +184,11 @@ var span = document.getElementById("pie-close");
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-    console.log('btn');
   modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-    console.log("clicked from pie")
   modal.style.display = "none";
 }
 
@@ -212,12 +209,10 @@ var progressSpan = document.getElementById("progress-close");
 
 // When the user clicks on the button, open the modal
 btn2.onclick = function() {
-    console.log('btn2');
   progressModal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 progressSpan.onclick = function() {
-    console.log("clicked")
   progressModal.style.display = "none";
 }
