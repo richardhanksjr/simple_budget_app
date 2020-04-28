@@ -2,7 +2,7 @@ from datetime import date
 import calendar
 from django.views.generic import TemplateView
 from django.views import View
-from django.http import HttpResponseRedirect, Http404, JsonResponse
+from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpResponseForbidden
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from web_app.models import PayCycle, Expense
@@ -52,7 +52,8 @@ class Index(LoginRequiredMixin, TemplateView):
         return context
 
 
-class UpdateExpense(View):
+class UpdateExpense(LoginRequiredMixin, View):
+    login_url = '/login/'
     def post(self, request, *args, **kwargs):
         try:
             pk = request.POST.get('pk')
@@ -65,7 +66,8 @@ class UpdateExpense(View):
             raise Http404("Expense does not exist")
 
 
-class DeleteExpense(View):
+class DeleteExpense(LoginRequiredMixin, View):
+    login_url = '/login/'
     def get(self, request, *args, **kwargs):
         try:
             pk = kwargs['pk']
@@ -76,7 +78,8 @@ class DeleteExpense(View):
             return Http404("Expense does not exist")
 
 
-class NewExpense(View):
+class NewExpense(LoginRequiredMixin, View):
+    login_url = '/login/'
     def post(self, request, *args, **kwargs):
         amount = request.POST.get('amount')
         expense_type = request.POST.get('expense_type')
@@ -87,7 +90,8 @@ class NewExpense(View):
         return HttpResponseRedirect('/')
 
 
-class AddCredit(View):
+class AddCredit(LoginRequiredMixin, View):
+    login_url = '/login/'
     def post(self, request, *args, **kwargs):
         """
         Take a given amount and add it to the current/initial value of the pay_cycle.  In other words,
@@ -101,8 +105,11 @@ class AddCredit(View):
         return HttpResponseRedirect('/')
 
 
-class ExpensePieChart(View):
+class ExpensePieChart(LoginRequiredMixin, View):
+    login_url = '/login/'
     def get(self, request):
+        if not request.user:
+            raise HttpResponseForbidden
         pay_cycle = PayCycle.objects.order_by('-start_date').first()
         cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle)
         # labels: ['Groceries', 'Takeout Food', 'Gas', 'Clothes', 'Baby Stuff', 'Toiletries', "Car or House",

@@ -23,6 +23,7 @@
             {% endfor %}
         </ul>
     {% endif %}
+    {% if user.is_authenticated %}
     <div class="header navbar fixed-top navbar-dark bg-info">
         <h2 class="text-white">Money Tracker</h2>
             <button id="myBtn" class="text-white">Expense Chart</button>
@@ -32,6 +33,7 @@
         <div class="modal" id="progressModal"><span class="close" id="progress-close">X</span><canvas class="modal-content" id="progressChart" width="400" height="400"></canvas></div>
 
     </div>
+    {%  endif %}
     <div class="container">
     {% block content %}
     {% endblock %}
