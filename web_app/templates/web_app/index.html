@@ -10,28 +10,28 @@
 
 {% endif %}
         <hr>
-    <form method="post" action="{% url 'new-expense' %}">
-        {%  csrf_token %}
-            <select name="expense_type">
-              {% for value, text in expense_types %}
-                  <option class="dropdown-item" value="{{ value}}">{{ text }}</option>
-              {% endfor %}
-            </select>
-            <select name="payment_type">
-                {% for value, text in payment_types %}
-                    <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
-                {% endfor %}
-            </select>
-                <input class="form-control mt-2 mb-2 new-expense-input" type="number" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
-                <input class="btn btn-success form-control" type="submit" value="Add New Expense">
-            </div>
-{#        </div>#}
-    </form>
+        <form method="post" action="{% url 'new-expense' %}">
+
+            {%  csrf_token %}
+                <select name="expense_type">
+                  {% for value, text in expense_types %}
+                      <option class="dropdown-item" value="{{ value}}">{{ text }}</option>
+                  {% endfor %}
+                </select>
+                <select name="payment_type">
+                    {% for value, text in payment_types %}
+                        <option class="dropdown-item" value="{{ value }}">{{ text }}</option>
+                    {% endfor %}
+                </select>
+                    <input class="form-control mt-2 mb-2 new-expense-input" type="number" placeholder="Add New Expense AMOUNT" step="0.01" min="0" name="amount" required>
+                    <input class="btn btn-success form-control" type="submit" value="Add New Expense">
+                </div>
+        </form>
     <br><br>
     <hr>
     <ul class="list-group">
         {%  for expense in cycle_expenses %}
-            <li class="list-group-item list-group-item-action">
+            <li class="list-group-item list-group-item-action expenses">
 {#                <a href="{% url 'update-expense' pk=expense.pk %}">Update</a>#}
                 <form  method="post" action="{% url 'update-expense' %}">
                     {%  csrf_token %}

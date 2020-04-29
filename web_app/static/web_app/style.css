@@ -9,6 +9,19 @@ body {
 
 }
 
+.expenses{
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 10px 8px #17a2b8;
+    margin-bottom: 25px;
+}
+
+.add-expense{
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 5px 10px 8px #17a2b8;
+    margin-bottom: 25px;
+}
 /*.money-left{*/
     /*margin-top: 4em;*/
 /*}*/
