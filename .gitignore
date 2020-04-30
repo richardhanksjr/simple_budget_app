@@ -130,3 +130,5 @@ dmypy.json
 *.pyc
 .idea/*
 *.config
+.out
+*.out
