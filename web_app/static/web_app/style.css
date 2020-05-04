@@ -131,29 +131,30 @@ ul li:nth-child(even){
 
 .money-animation{
     animation-name: moneyLoad;
-    animation-duration: 3s;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-in-out;
 }
 
 @keyframes moneyLoad{
     0%{
-        transform: translateX(-100%) rotate(180deg);
+        transform: translateX(-100%) translateY(-100%) rotate(20deg);
+
     }
 
     80%{
-        transform: translateX(10%);
+        transform: translateX(10%) translateY(10%) rotate(-20deg);
     }
 
 
-    95%{
-        transform: rotate(-20deg)
-    }
+    /*95%{*/
+        /*transform: rotate(-20deg)*/
+    /*}*/
 
-    98%{
-        transform: rotate(-10deg);
-    }
+    /*98%{*/
+        /*transform: rotate(-10deg);*/
+    /*}*/
 
     100%{
         transform: translateX(0);
-        rotate(0deg);
     }
 }
