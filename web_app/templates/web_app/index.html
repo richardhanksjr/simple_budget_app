@@ -2,11 +2,11 @@
 
 {% block content %}
     {%  if money_color == 'GREEN'  %}
-        <div class="text-dark jumbotron bg-success money-left"><h1 class="cssanimation sequence leFlyInBottom">${{ money_left|floatformat:2 }}</h1></div>
+        <div class="text-dark jumbotron bg-success money-left"><h1 class="money-animation">${{ money_left|floatformat:2 }}</h1></div>
     {% elif money_color == 'RED' %}
-        <div class="text-dark jumbotron bg-danger money-left"><h1 class="cssanimation sequence leFlyInBottom">${{ money_left|floatformat:2 }}</h1></div>
+        <div class="text-dark jumbotron bg-danger money-left"><h1 class="money-animation">${{ money_left|floatformat:2 }}</h1></div>
     {%  else %}
-        <div class="text-dark jumbotron bg-warning money-left"><h1 class="cssanimation sequence leFlyInBottom">${{ money_left|floatformat:2 }}</h1></div>
+        <div class="text-dark jumbotron bg-warning money-left"><h1 class="money-animation">${{ money_left|floatformat:2 }}</h1></div>
 
 {% endif %}
         <hr>

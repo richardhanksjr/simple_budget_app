@@ -32,83 +32,83 @@ ul li:nth-child(even){
 /*}*/
 
 /* The Modal (background) */
-/*.modal {*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+    margin-right: 1em;
+    margin-top: 1em;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#myModal {
   /*display: none; !* Hidden by default *!*/
-  /*position: fixed; !* Stay in place *!*/
-  /*z-index: 1; !* Sit on top *!*/
-  /*left: 0;*/
-  /*top: 0;*/
-  /*width: 100%; !* Full width *!*/
-  /*height: 100%; !* Full height *!*/
-  /*overflow: auto; !* Enable scroll if needed *!*/
-  /*background-color: rgb(0,0,0); !* Fallback color *!*/
-  /*background-color: rgba(0,0,0,0.4); !* Black w/ opacity *!*/
-/*}*/
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-/*!* Modal Content/Box *!*/
-/*.modal-content {*/
-  /*background-color: #fefefe;*/
-  /*margin: 15% auto; !* 15% from the top and centered *!*/
-  /*padding: 20px;*/
-  /*border: 1px solid #888;*/
-  /*width: 80%; !* Could be more or less, depending on screen size *!*/
-/*}*/
+/* Modal Content/Box */
+#myChart {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
 
-/*!* The Close Button *!*/
-/*.close {*/
-  /*color: #aaa;*/
-  /*float: right;*/
-  /*font-size: 28px;*/
-  /*font-weight: bold;*/
-    /*margin-right: 1em;*/
-    /*margin-top: 1em;*/
-/*}*/
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+    margin-right: 1em;
+    margin-top: 1em;
+}
 
-/*.close:hover,*/
-/*.close:focus {*/
-  /*color: black;*/
-  /*text-decoration: none;*/
-  /*cursor: pointer;*/
-/*}*/
-
-/*#myModal {*/
-  /*!*display: none; !* Hidden by default *!*!*/
-  /*position: fixed; !* Stay in place *!*/
-  /*z-index: 1; !* Sit on top *!*/
-  /*left: 0;*/
-  /*top: 0;*/
-  /*width: 100%; !* Full width *!*/
-  /*height: 100%; !* Full height *!*/
-  /*overflow: auto; !* Enable scroll if needed *!*/
-  /*background-color: rgb(0,0,0); !* Fallback color *!*/
-  /*background-color: rgba(0,0,0,0.4); !* Black w/ opacity *!*/
-/*}*/
-
-/*!* Modal Content/Box *!*/
-/*#myChart {*/
-  /*background-color: #fefefe;*/
-  /*margin: 15% auto; !* 15% from the top and centered *!*/
-  /*padding: 20px;*/
-  /*border: 1px solid #888;*/
-  /*width: 80%; !* Could be more or less, depending on screen size *!*/
-/*}*/
-
-/*!* The Close Button *!*/
-/*.close {*/
-  /*color: #aaa;*/
-  /*float: right;*/
-  /*font-size: 28px;*/
-  /*font-weight: bold;*/
-    /*margin-right: 1em;*/
-    /*margin-top: 1em;*/
-/*}*/
-
-/*.close:hover,*/
-/*.close:focus {*/
-  /*color: black;*/
-  /*text-decoration: none;*/
-  /*cursor: pointer;*/
-/*}*/
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 .cssanimation, .cssanimation span {
     animation-duration: 1s;
@@ -126,5 +126,34 @@ ul li:nth-child(even){
     50% {
         transform: translate(10px, -50px);
         animation-timing-function: ease-in-out
+    }
+}
+
+.money-animation{
+    animation-name: moneyLoad;
+    animation-duration: 3s;
+}
+
+@keyframes moneyLoad{
+    0%{
+        transform: translateX(-100%) rotate(180deg);
+    }
+
+    80%{
+        transform: translateX(10%);
+    }
+
+
+    95%{
+        transform: rotate(-20deg)
+    }
+
+    98%{
+        transform: rotate(-10deg);
+    }
+
+    100%{
+        transform: translateX(0);
+        rotate(0deg);
     }
 }
