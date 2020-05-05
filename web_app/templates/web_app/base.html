@@ -26,10 +26,10 @@
     {% if user.is_authenticated %}
     <div class="header navbar fixed-top navbar-dark bg-info">
         <h2 class="text-white">Money Tracker</h2>
-            <button id="myBtn" class="text-white">Expense Chart</button>
+            <button id="myBtn" class="chart-button">Expense Chart</button>
         <div class="modal" id="myModal"><span class="close" id="pie-close">X</span><canvas class="modal-content" id="myChart" width="300" height="300"></canvas></div>
 
-        <button id="progressButton" class="text-white">Expense Progress</button>
+        <button id="progressButton" class="chart-button">Expense Progress</button>
         <div class="modal" id="progressModal"><span class="close" id="progress-close">X</span><canvas class="modal-content" id="progressChart" width="200" height="200"></canvas></div>
 
     </div>

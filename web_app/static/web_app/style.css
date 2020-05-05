@@ -163,3 +163,9 @@ ul li:nth-child(even){
 .money-left:hover{
     transform: translateY(-3px);
 }
+
+.chart-button{
+    border-radius: 10px;
+    background-color: white;
+    color: #17a2b8;
+}
