@@ -22,13 +22,14 @@ class Expense(models.Model):
         ('take_out_food', 'Take Out Food'),
         ('gas', 'Gas'),
         ('clothes', 'Clothes'),
-        ('baby_stuff', 'Baby Stuff'),
+        ('baby_stuff', 'Kid Stuff'),
         ('toiletries', 'Toiletries'),
         ('car_house', 'Car or House'),
         ('entertainment', 'Entertainment'),
         ('drinks', "Drinks"),
         ('dogs', 'Dogs'),
         ('medical', 'Medical'),
+        ('previous_balance', 'Previous Balance'),
         ('other', 'Other')
     ]
     date_created = models.DateTimeField(auto_now_add=True)

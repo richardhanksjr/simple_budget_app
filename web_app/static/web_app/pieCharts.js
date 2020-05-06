@@ -5,7 +5,7 @@ document.addEventListener("load", function(){
         var pieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Groceries', 'Takeout Food', 'Gas', 'Clothes', 'Baby Stuff', 'Toiletries', "Car or House", 'Entertainment', 'Drinks', 'Dogs', 'Medical', 'Other'],
+            labels: ['Groceries', 'Takeout Food', 'Gas', 'Clothes', 'Kid Stuff', 'Toiletries', "Car or House", 'Entertainment', 'Drinks', 'Dogs', 'Medical', 'Previous Balance', 'Other'],
             datasets: [{
                 label: 'Expense Allocation',
                 data: data,
