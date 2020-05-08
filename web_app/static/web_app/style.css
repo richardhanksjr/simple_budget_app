@@ -129,9 +129,17 @@ ul li:nth-child(even){
     }
 }
 
-.money-animation{
+/*.money-animation{*/
+    /*opacity: 1;*/
+    /*animation-name: moneyLoad;*/
+    /*animation-duration: 2s;*/
+    /*animation-timing-function: ease-in-out;*/
+/*}*/
+
+.money-left{
     animation-name: moneyLoad;
     animation-duration: 2s;
+    animation-delay: .5s;
     animation-timing-function: ease-in-out;
 }
 
@@ -158,6 +166,16 @@ ul li:nth-child(even){
         transform: rotate(1deg);
     }
 
+}
+
+@keyframes moneyFadeIn{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
 }
 
 .money-left:hover{
