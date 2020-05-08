@@ -141,6 +141,7 @@ ul li:nth-child(even){
     animation-duration: 2s;
     animation-delay: .5s;
     animation-timing-function: ease-in-out;
+    animation-fill-mode: backwards;
 }
 
 @keyframes moneyLoad{
