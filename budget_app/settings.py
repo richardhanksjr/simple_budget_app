@@ -13,9 +13,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import configparser
 
+
+
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 # Use RawConfigParser to handle the special chars in the SECRET_KEY
-config = configparser.RawConfigParser()
-config.read('budget_app/settings.config')
+# config = configparser.RawConfigParser()
+# config.read('budget_app/settings.config')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,11 +28,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config['SETTINGS']['SECRET_KEY']
-
+# SECRET_KEY = config['SETTINGS']['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config.getboolean('SETTINGS', 'debug')
-ALLOWED_HOSTS = ['161.35.96.45', 'localhost', '127.0.0.1']
+# DEBUG = config.getboolean('SETTINGS', 'debug')
+DEBUG = os.environ.get('DEBUG', default=0)
+ALLOWED_HOSTS = ['161.35.96.45', 'localhost', '127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -40,12 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'web_app',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,8 +86,12 @@ WSGI_APPLICATION = 'budget_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432
     }
 }
 
@@ -129,3 +139,19 @@ LOGIN_REDIRECT_URL = "index"
 
 # TEN YEARS aka, don't log out since I'm the only user!
 SESSION_COOKIE_AGE = 31536000 * 10
+
+
+if ENVIRONMENT == 'production':
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    DEBUG = False
+
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
