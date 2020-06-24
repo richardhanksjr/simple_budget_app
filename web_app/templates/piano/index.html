@@ -1,4 +1,3 @@
-{#{% extends  'web_app/base.html' %}#}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, content=minimal-ui"/>
-    <title>Money Tracker</title>
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
@@ -28,21 +26,11 @@
     <meta name="twitter:image"
           content="https://i1.wp.com/1000mileworld.com/wp-content/uploads/2019/09/twitterCard-piano.jpg"/>
 
-    <title>Javascript Piano Keyboard</title>
+    {% block title %}
+        <title>Piano Note Quiz</title>
+    {% endblock %}
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140400287-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-140400287-1');
-    </script>
 
     <style>
 
