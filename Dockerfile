@@ -9,3 +9,5 @@ COPY Pipfile Pipfile.lock /code/
 RUN pip install pipenv && pipenv install --system
 
 COPY . /code/
+
+RUN python maange.py collectstatic --noinput
