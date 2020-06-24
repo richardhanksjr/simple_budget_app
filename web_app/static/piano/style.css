@@ -1,0 +1,15 @@
+#next_question{
+    margin-top: 10px;
+}
+
+.piano-container{
+    width: 100%;
+}
+
+body{
+    padding-top: 0 !important;
+}
+
+div#boo{
+    margin-bottom: 0;
+}

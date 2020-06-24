@@ -1,0 +1,236 @@
+{#{% extends  'web_app/base.html' %}#}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, content=minimal-ui"/>
+    <title>Money Tracker</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'piano/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'web_app/style.css' %}">
+    <link rel="apple-touch-icon" href="{% static 'web_app/budget.jpg' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="description"
+          content="Play with an electronic piano keyboard made with Javascript. Dynamically generated audio creates a realistic playing experience."/>
+    <meta name="author" content="Joe Liang"/>
+
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:description"
+          content="Play with an electronic piano keyboard made with Javascript. Dynamically generated audio creates a realistic playing experience."/>
+    <meta name="twitter:title" content="Javascript Piano Keyboard"/>
+    <meta name="twitter:image"
+          content="https://i1.wp.com/1000mileworld.com/wp-content/uploads/2019/09/twitterCard-piano.jpg"/>
+
+    <title>Javascript Piano Keyboard</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140400287-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-140400287-1');
+    </script>
+
+    <style>
+
+        body {
+            font-family: Georgia;
+            text-align: center;
+        }
+
+        .banner {
+            width: 1200px;
+            height: 340px;
+            object-fit: cover;
+            object-position: 0px -90px;
+        }
+
+        .title {
+            color: #F50890;
+            font-size: 40px;
+            text-shadow: 0px -1px 5px #F5F408;
+        }
+
+        .content {
+            background-color: #FAD7A0;
+            margin: 20px;
+            padding: 30px;
+            border-style: double;
+            border-width: 5px;
+            font-size: 18px;
+            text-align: left;
+            width: 1200px;
+            display: inline-block;
+        }
+
+        .key {
+            position: absolute;
+            font-family: Helvetica;
+            font-weight: 100;
+            font-size: 12px;
+            border: 1px solid rgba(32, 32, 32, 0.2);
+            border-radius: 0px 0px 5px 5px;
+            cursor: pointer;
+            box-shadow: 0px 5px 1px rgba(32, 32, 32, 0.2);
+            -webkit-transition: margin 0.05s ease, background-color 0.05s ease, box-shadow 0.05s ease;
+        }
+
+        .key:hover {
+            background-color: #71DB90;
+        }
+
+        .key .label {
+            position: absolute;
+            bottom: 15px;
+            text-align: center;
+            left: 0px;
+            right: 0px;
+        }
+
+        .keyLabel {
+            font-weight: 900;
+            text-shadow: 0px -1px 5px #EBF508;
+            font-size: 15px;
+        }
+
+        .black {
+            background-color: rgb(32, 32, 32);
+            color: #ffffff;
+            z-index: 1;
+            text-shadow: 0px -1px 1px #FF0000;
+        }
+
+        .white {
+            background-color: #F2F2DE;
+            color: #3008F5;
+            z-index: 0;
+            text-shadow: 0px 1px 1px #08E8F5;
+        }
+
+        .keyboard-holder {
+            margin: 30px auto;
+            height: 200px;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+        }
+
+        /*.playing {background-color: #1BC0EA;}*/
+
+    </style>
+
+
+</head>
+<div class="container-fluid piano-container">
+    <div class="row">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10">
+                    <div class="row">
+                        <button class="answer_button btn btn-primary col">A</button>
+                        <button class="answer_button btn btn-primary col ml-1">A#</button>
+                        <button class="answer_button btn btn-primary col ml-1">Bb</button>
+                        <button class="answer_button btn btn-primary col ml-1">B</button>
+                        <button class="answer_button btn btn-primary col ml-1">C</button>
+                        <button class="answer_button btn btn-primary col ml-1">C#</button>
+                        <button class="answer_button btn btn-primary col ml-1">Db</button>
+                        <button class="answer_button btn btn-primary col ml-1">D</button>
+                        <button class="answer_button btn btn-primary col ml-1">D#</button>
+                    </div>
+                    <div class="row mt-2">
+                        <button class="answer_button btn btn-primary col">Eb</button>
+                        <button class="answer_button btn btn-primary col ml-1">E</button>
+                        <button class="answer_button btn btn-primary col ml-1">F</button>
+                        <button class="answer_button btn btn-primary col ml-1">F#</button>
+                        <button class="answer_button btn btn-primary col ml-1">Gb</button>
+                        <button class="answer_button btn btn-primary col ml-1">G</button>
+                        <button class="answer_button btn btn-primary col ml-1">G#</button>
+                        <button class="answer_button btn btn-primary col ml-1">Ab</button>
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <button id="next_question" class="btn btn-success">Next Question</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {#        </div>#}
+
+</div>
+<div class="row">
+
+
+    <div class="col">
+        <div class="card text-center">
+
+            <div class="card-body">
+
+
+                <div id="correct"></div>
+                <div class="row">
+                    <div class="col">
+                        <div id="boo" class="col-9"></div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-info">
+                            <div class="card-text col text-info"><span class="card-block"
+                                                                       id="answered_count_buttons">0</span> out of <span
+                                    id="total_count_buttons" class="card-block">0</span>
+                                correct note
+                                names
+                                identified.
+                            </div>
+                            <div class="card-text col text-info"><span id="answered_count" class="card-block">0</span> out of
+                                <span
+                                        id="total_count" class="card-block">0</span>
+                                correct
+                                keyboard keys
+                                identified.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div ID="keyboard" class="keyboard-holder"></div> <!--calls js to create keyboard with id-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
+
+<script src="{% static 'piano/audiosynth.js' %}"></script>
+<script src="{% static 'piano/playKeyboard.js' %}"></script>
+
+</div>
+</div>
+
+
+</html>
