@@ -10,4 +10,4 @@ RUN pip install pipenv && pipenv install --system
 
 COPY . /code/
 
-RUN python maange.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
