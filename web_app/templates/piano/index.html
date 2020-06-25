@@ -16,15 +16,8 @@
 
     <meta charset="UTF-8">
     <meta name="description"
-          content="Play with an electronic piano keyboard made with Javascript. Dynamically generated audio creates a realistic playing experience."/>
-    <meta name="author" content="Joe Liang"/>
+          content="Practice identifying note names and piano keys for notes on a music staff."/>
 
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:description"
-          content="Play with an electronic piano keyboard made with Javascript. Dynamically generated audio creates a realistic playing experience."/>
-    <meta name="twitter:title" content="Javascript Piano Keyboard"/>
-    <meta name="twitter:image"
-          content="https://i1.wp.com/1000mileworld.com/wp-content/uploads/2019/09/twitterCard-piano.jpg"/>
 
     {% block title %}
         <title>Piano Note Quiz</title>
@@ -124,6 +117,7 @@
 
 
 </head>
+<body>
 <div class="container-fluid piano-container">
     <div class="row">
 
@@ -186,7 +180,8 @@
                                 names
                                 identified.
                             </div>
-                            <div class="card-text col text-info"><span id="answered_count" class="card-block">0</span> out of
+                            <div class="card-text col text-info"><span id="answered_count" class="card-block">0</span>
+                                out of
                                 <span
                                         id="total_count" class="card-block">0</span>
                                 correct
@@ -211,7 +206,6 @@
 </div>
 
 
-
 <script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
 
 <script src="{% static 'piano/audiosynth.js' %}"></script>
@@ -221,4 +215,12 @@
 </div>
 
 
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick"/>
+    <input type="hidden" name="hosted_button_id" value="2LB56PF5FQG7W"/>
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit"
+           title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button"/>
+    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+</form>
+</body>
 </html>
