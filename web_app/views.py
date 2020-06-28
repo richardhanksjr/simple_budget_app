@@ -5,7 +5,7 @@ from django.views import View
 from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpResponseForbidden
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from tracking_analyzer.models import Tracker
+# from tracking_analyzer.models import Tracker
 
 from web_app.models import PayCycle, Expense
 
@@ -143,6 +143,6 @@ class PianoView(TemplateView):
 
     def get_context_data(self, **kwargs):
         piano = Piano.objects.create(name='text')
-        Tracker.objects.create_from_request(self.request, piano)
+        # Tracker.objects.create_from_request(self.request, piano)
 
         return super().get_context_data(**kwargs)
