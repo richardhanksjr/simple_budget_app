@@ -18,8 +18,6 @@ from django.core.management.utils import get_random_secret_key
 
 mimetypes.add_type('text/css', '.css', True)
 
-
-
 ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 # Use RawConfigParser to handle the special chars in the SECRET_KEY
 # config = configparser.RawConfigParser()
@@ -27,7 +25,6 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -40,7 +37,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default=get_random_secret_key())
 DEBUG = os.environ.get('DEBUG', default=0)
 ALLOWED_HOSTS = ['161.35.96.45', 'localhost', '127.0.0.1', '.herokuapp.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'django_user_agents',
+    'tracking_analyzer',
     'web_app',
     'front_end'
 ]
@@ -64,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
 ROOT_URLCONF = 'budget_app.urls'
@@ -86,7 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'budget_app.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -100,7 +98,6 @@ DATABASES = {
         'PORT': 5432
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -120,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -134,7 +130,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -144,7 +139,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -154,7 +149,6 @@ LOGIN_REDIRECT_URL = "index"
 
 # TEN YEARS aka, don't log out since I'm the only user!
 SESSION_COOKIE_AGE = 31536000 * 10
-
 
 if ENVIRONMENT == 'production':
     SECURE_SSL_REDIRECT = True
@@ -171,3 +165,6 @@ import dj_database_url
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+# django-tracker
+GEOIP_PATH = BASE_DIR

@@ -9,5 +9,5 @@ urlpatterns = [
     path('new-expense', views.NewExpense.as_view(), name='new-expense'),
     path('add-credit', views.AddCredit.as_view(), name='add-credit'),
     path('expense-pie-chart', views.ExpensePieChart.as_view(), name='expense-pie-chart'),
-    path('piano', views.TemplateView.as_view(template_name='piano/index.html'), name='piano'),
+    path('piano', views.PianoView.as_view(), name='piano'),
 ]
