@@ -42,8 +42,4 @@ class Expense(models.Model):
         return f"Pay cycle: {self.pay_cycle.start_date} -- {self.amount}"
 
 
-class Piano(models.Model):
-    name = models.CharField(max_length=10)
-
-
 

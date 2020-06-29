@@ -47,8 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'django_user_agents',
-    'tracking_analyzer',
     'web_app',
     'front_end'
 ]
@@ -62,7 +60,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
 ROOT_URLCONF = 'budget_app.urls'
@@ -166,8 +163,6 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-# django-tracker
-GEOIP_PATH = BASE_DIR
 
 LOGGING = {
     'version': 1,
@@ -183,4 +178,8 @@ LOGGING = {
             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
         },
     },
+}
+
+GOOGLE_ANALYTICS = {
+    'google_analytics_id': 'UA-171151617-1'
 }
