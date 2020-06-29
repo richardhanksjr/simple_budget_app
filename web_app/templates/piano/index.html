@@ -1,4 +1,6 @@
 {% load static %}
+{% load google_analytics_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,6 +120,9 @@
 
 </head>
 <body>
+<div style="display:none">
+    <img src="{% google_analytics %}" width="0" height="0" />
+</div>
 <div class="container-fluid piano-container">
     <div class="row">
 
