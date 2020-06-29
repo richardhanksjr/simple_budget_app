@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'web_app',
-    'front_end'
+    'front_end',
+    'google_analytics'
 ]
 
 MIDDLEWARE = [
