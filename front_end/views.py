@@ -9,7 +9,7 @@ class Index(TemplateView):
 class SubmitText(View):
     def post(self, request):
         narrow_factor = 5
-        letters = [(f'static/front_end/images/{letter.upper()}.png' if letter != " " else "space", letter.isupper()) for
+        letters = [(f'static/front_end/images/{letter.lower()}.png' if letter != " " else "space", letter.isupper()) for
                    letter in list(request.POST.get('letters'))]
         upper_width = request.POST.get('upper_width')
         upper_height = request.POST.get('upper_height')
