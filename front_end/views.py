@@ -18,10 +18,8 @@ class SubmitText(View):
         lower_width = request.POST.get('lower_width')
         lower_width_narrow = int(lower_width) - narrow_factor
         upper_width_narrow = int(upper_width) - narrow_factor
-        narrow_list = ['static/front_end/images/C.png', 'static/front_end/images/E.png', 'static/front_end/images/X.png',
-                       'static/front_end/images/Y.png', 'static/front_end/images/H.png', 'static/front_end/images/G.png',
-                       'static/front_end/images/F.png', 'static/front_end/images/J.png', 'static/front_end/images/I.png',
-                       'static/front_end/images/T.png', 'static/front_end/images/P.png']
+        narrow_list = ['static/front_end/images/b.png', 'static/front_end/images/t.png']
+        special_multiplier = 1.05
         context = {
             'letters': letters,
             'upper_width': upper_width,
@@ -31,6 +29,10 @@ class SubmitText(View):
             'lower_height': lower_height,
             'lower_width_narrow': lower_width_narrow,
             'upper_width_narrow': upper_width_narrow,
-            'narrow_list': narrow_list
+            'narrow_list': narrow_list,
+            'special_height': int(upper_height) * special_multiplier,
+            'special_width': int(upper_width) * special_multiplier,
+            'special_height_lower': int(lower_height) * special_multiplier,
+            'special_width_lower': int(lower_width) * special_multiplier
         }
         return render(request, 'front_end/letters.html', context)
