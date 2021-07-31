@@ -18,7 +18,7 @@ class SubmitText(View):
         lower_width = request.POST.get('lower_width')
         lower_width_narrow = int(lower_width) - narrow_factor
         upper_width_narrow = int(upper_width) - narrow_factor
-        narrow_list = ['static/front_end/images/b.png', 'static/front_end/images/t.png']
+        narrow_list = []
         special_multiplier = 1.05
         context = {
             'letters': letters,
