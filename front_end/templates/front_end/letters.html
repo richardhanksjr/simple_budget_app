@@ -9,12 +9,23 @@
             {% elif letter in narrow_list %}
                 {% if upper %}
                     <div class="coly">
-                        <img src="{{ letter }}" style="width: {{ special_width }}px; height: {{ special_height }}px">
+                        <img src="{{ letter }}" style="width: {{ special_width }}px; height: {{ upper_height }}px">
                     </div>
                 {% else %}
                     <div class="coly">
                         <img src="{{ letter }}"
-                             style="width: {{ special_width_lower }}px; height: {{ special_height_lower }}px; margin-top: {{ lower_margin_top }}px;">
+                             style="width: {{ special_width_lower }}px; height: {{ lower_height }}px; margin-top: {{ lower_margin_top }}px;">
+                    </div>
+                {% endif %}
+            {% elif letter in wide_list %}
+                {% if upper %}
+                    <div class="coly">
+                        <img src="{{ letter }}" style="width: {{ wide_width }}px; height: {{ upper_height }}px">
+                    </div>
+                {% else %}
+                    <div class="coly">
+                        <img src="{{ letter }}"
+                             style="width: {{ wide_width_lower }}px; height: {{ lower_height }}px; margin-top: {{ lower_margin_top }}px;">
                     </div>
                 {% endif %}
             {% elif upper %}
