@@ -11,5 +11,6 @@ urlpatterns = [
     path('add-credit', views.AddCredit.as_view(), name='add-credit'),
     path('expense-pie-chart', views.ExpensePieChart.as_view(), name='expense-pie-chart'),
     path('piano', views.PianoView.as_view(), name='piano'),
-    path('countdown', views.TemplateView.as_view(template_name="countdown/countdown.html"))
+    path('countdown', views.TemplateView.as_view(template_name="countdown/countdown.html")),
+    path("drawing", views.Drawing.as_view(), name='drawing'),
 ]

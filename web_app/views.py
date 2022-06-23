@@ -6,7 +6,19 @@ from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpRespons
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from web_app.models import PayCycle, Expense
+from web_app.models import PayCycle, Expense, Drawing as DrawingModel
+
+class Drawing(TemplateView):
+    template_name = 'web_app/drawing.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        most_recent_drawing = DrawingModel.objects.all().order_by('-date_created').first()
+        print("drawing is", most_recent_drawing)
+        context['drawing'] = most_recent_drawing
+        return context
+
 
 class Index(LoginRequiredMixin, TemplateView):
     template_name = 'web_app/index.html'
@@ -22,24 +34,17 @@ class Index(LoginRequiredMixin, TemplateView):
         day_of_cycle = day_of_month % days_in_current_cycle
         amount_per_day = pay_cycle.pay_amount / (num_days_in_current_month / 2)
         total_expected_remaining = pay_cycle.pay_amount - (day_of_cycle * amount_per_day)
-        print(total_expected_remaining)
-        print(total_expenses)
+
         if total_expected_remaining <= pay_cycle.pay_amount - total_expenses:
             return 'GREEN'
         elif total_expected_remaining * .75<= (pay_cycle.pay_amount - total_expenses):
             return 'YELLOW'
         return 'RED'
-        # total_expected_to_date = day_of_cycle * amount_per_day
-        #         # percentage_of_expected = total_expenses / total_expected_to_date
-        #         # if percentage_of_expected <= 1:
-        #         #     return "GREEN"
-        #         # elif percentage_of_expected > 1.5:
-        #         #     return "RED"
-        #         # return "YELLOW"
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pay_cycle = PayCycle.objects.order_by('-start_date').first()
+        pay_cycle = PayCycle.objects.filter(user=self.request.user).order_by('-start_date').first()
         if not pay_cycle:
             return context
         cycle_expenses = Expense.objects.filter(pay_cycle=pay_cycle).order_by('-date_created')
@@ -137,4 +142,8 @@ class ExpensePieChart(LoginRequiredMixin, View):
 
 class PianoView(TemplateView):
     template_name = 'piano/index.html'
+
+
+
+
 

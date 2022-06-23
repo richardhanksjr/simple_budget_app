@@ -1,9 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class PayCycle(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     pay_amount = models.FloatField(null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return f"{self.start_date}: {self.pay_amount}"
@@ -41,5 +46,13 @@ class Expense(models.Model):
     def __str__(self):
         return f"Pay cycle: {self.pay_cycle.start_date} -- {self.amount}"
 
+
+class Drawing(models.Model):
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
+class DrawingParticipant(models.Model):
+    name = models.CharField(max_length=30)
+    drawing = models.ManyToManyField(Drawing)
 
 
