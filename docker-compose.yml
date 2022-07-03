@@ -3,7 +3,7 @@ version: '3.7'
 services:
   web:
     build: .
-    command: gunicorn budget_app.wsgi -b 0.0.0.0:8001
+    command: gunicorn budget_app.wsgi -b 0.0.0.0:8001 --worker-tmp-dir /dev/shm --workers 2
     environment:
       - SECRET_KEY="${SECRET_KEY}"
       - DEBUG="${DEBUG}"

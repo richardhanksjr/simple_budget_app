@@ -10,7 +10,8 @@
 
 {% endif %}
         <hr>
-        <form method="post" action="{% url 'new-expense' %}">
+        {% if pay_cycle %}
+        <form method="post" action="{% url 'new-expense' pay_cycle_id=pay_cycle %}">
 
             {%  csrf_token %}
                 <select name="expense_type">
@@ -27,6 +28,7 @@
                     <input class="btn btn-success form-control" type="submit" value="Add New Expense">
                 </div>
         </form>
+        {% endif %}
     <br><br>
     <hr>
     <ul class="list-group">
@@ -58,7 +60,7 @@
 
 
     <br><hr>
-    <form method="post" action="{% url 'add-credit' %}">
+    <form method="post" action="{% url 'add-credit' pay_cycle %}">
         {%  csrf_token %}
                 <input class="form-control mt-2 mb-2" type="number" placeholder="Add New Credit Amount" step="0.01" min="0" name="amount" required>
                 <input class="btn btn-secondary form-control mb-2" type="submit" value="Add New Credit">

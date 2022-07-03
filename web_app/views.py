@@ -54,6 +54,7 @@ class Index(LoginRequiredMixin, TemplateView):
         context['expense_types'] = Expense.EXPENSE_TYPE_CHOICES
         context['payment_types'] = Expense.PAYMENT_TYPE_CHOICES
         context['money_color'] = self._compute_money_color(total_expenses, pay_cycle)
+        context['pay_cycle'] = pay_cycle.pk
         return context
 
 
@@ -85,11 +86,11 @@ class DeleteExpense(LoginRequiredMixin, View):
 
 class NewExpense(LoginRequiredMixin, View):
     login_url = '/login/'
-    def post(self, request, *args, **kwargs):
+    def post(self, request, pay_cycle_id, *args, **kwargs):
         amount = request.POST.get('amount')
         expense_type = request.POST.get('expense_type')
         payment_type = request.POST.get('payment_type')
-        pay_cycle = PayCycle.objects.order_by('-start_date').first()
+        pay_cycle = PayCycle.objects.get(pk=pay_cycle_id)
         Expense.objects.create(amount=amount, pay_cycle=pay_cycle, expense_type=expense_type, payment_type=payment_type)
         messages.add_message(request, messages.INFO, 'Expense successfully added!')
         return HttpResponseRedirect('/')
@@ -97,13 +98,13 @@ class NewExpense(LoginRequiredMixin, View):
 
 class AddCredit(LoginRequiredMixin, View):
     login_url = '/login/'
-    def post(self, request, *args, **kwargs):
+    def post(self, request, pay_cycle_id, *args, **kwargs):
         """
         Take a given amount and add it to the current/initial value of the pay_cycle.  In other words,
         we are treating a credit like we had more money to begin with than we initially did.
         """
         credit_amount = request.POST.get('amount')
-        pay_cycle = PayCycle.objects.order_by('-start_date').first()
+        pay_cycle = PayCycle.objects.get(pk=pay_cycle_id)
         pay_cycle.pay_amount = pay_cycle.pay_amount + float(credit_amount)
         pay_cycle.save()
         messages.add_message(request, messages.INFO, 'Credit successfully added!')
