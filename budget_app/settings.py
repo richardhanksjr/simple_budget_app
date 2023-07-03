@@ -83,6 +83,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'budget_app.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://gentle-brook-54977.herokuapp.com/'
+]
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
