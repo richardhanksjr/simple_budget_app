@@ -38,6 +38,7 @@ class SubmitText(View):
         print('static/front_end/images/I.png' in wide_list)
         special_multiplier = 1.25
         wide_multiplier = .6
+        letter_spacing = 5
         context = {
             'letters': letters,
             'upper_width': upper_width,
@@ -55,5 +56,6 @@ class SubmitText(View):
             'wide_list': wide_list,
             'wide_width': int(upper_width) * wide_multiplier,
             'wide_width_lower': int(lower_width) * wide_multiplier,
+            'letter_spacing': letter_spacing
         }
         return render(request, 'front_end/letters.html', context)
