@@ -84,7 +84,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'budget_app.wsgi.application'
 
 CSRF_TRUSTED_ORIGINS = [
-    '*.herokuapp.com/'
+    'https://*.herokuapp.com'
 ]
 
 # Database
