@@ -11,9 +11,9 @@ class SubmitText(View):
         narrow_factor = 5
         letters = []
         for letter in list(request.POST.get('letters')):
-            if letter.isupper():
-                letters.append((f'static/front_end/images/{letter}.png', True))
-            elif letter == " ":
+            # if letter.isupper():
+            #     letters.append((f'static/front_end/images/{letter}.png', True))
+            if letter == " ":
                 letters.append(("space", False))
             else:
                 letters.append((f'static/front_end/images/{letter}.png', False))
