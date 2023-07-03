@@ -8,7 +8,7 @@ class Index(TemplateView):
 
 class SubmitText(View):
     def post(self, request):
-        narrow_factor = 5
+        narrow_factor = 2
         letters = []
         for letter in list(request.POST.get('letters')):
             if letter.isupper():
@@ -26,10 +26,16 @@ class SubmitText(View):
         lower_width = request.POST.get('lower_width')
         lower_width_narrow = int(lower_width) - narrow_factor
         upper_width_narrow = int(upper_width) - narrow_factor
-        narrow_list = ['cap-K.png', 'cap-M.png', 'm.png', 'cap-W.png', 'cap-X.png']
-        wide_list = ['f.png', 'i.png', 'cap-I.png', 'j.png', 'l.png', 'r.png', 't.png']
-        narrow_list = [f"static/front_end/images/{n}" for n in narrow_list]
-        wide_list = [f"static/front_end/images/{n}" for n in wide_list]
+
+            # narrow_list = ['cap-K.png', 'cap-M.png', 'm.png', 'cap-W.png', 'cap-X.png']
+            # wide_list = ['f.png', 'i.png', 'cap-I.png', 'j.png', 'l.png', 'r.png', 't.png']
+        narrow_list = []
+        wide_list = ['i']
+        narrow_list = [f"static/front_end/images/{n}.png" for n in narrow_list]
+        wide_list = [f"static/front_end/images/{n}.png" for n in wide_list]
+
+        print("wide list is", wide_list)
+        print('static/front_end/images/I.png' in wide_list)
         special_multiplier = 1.25
         wide_multiplier = .6
         context = {
