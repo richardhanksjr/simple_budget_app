@@ -12,7 +12,7 @@ class SubmitText(View):
         letters = []
         for letter in list(request.POST.get('letters')):
             if letter.isupper():
-                letters.append((f'static/front_end/images/cap-{letter}.png', True))
+                letters.append((f'static/front_end/images/{letter}.png', True))
             elif letter == " ":
                 letters.append(("space", False))
             else:
