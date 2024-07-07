@@ -1,11 +1,15 @@
-img{
-margin-right: 3px}
-
-.upper{
-    width: 20px;
-    height: 20px
+img {
+    display: block;
+    margin-right: -5px;
 }
 
-.space{
-    margin-right: 5px;
+.coly {
+    display: flex;
+    align-items: baseline; /* Align items to the baseline */
 }
+
+
+
+/* .letter-container {
+    display: flex;
+} */
