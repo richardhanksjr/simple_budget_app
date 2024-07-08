@@ -1,15 +1,12 @@
-img {
-    display: block;
-    margin-right: -5px;
+img{
+    margin-right: -8px;
 }
-
-.coly {
-    display: flex;
-    align-items: baseline; /* Align items to the baseline */
-}
-
-
-
-/* .letter-container {
-    display: flex;
-} */
+    
+    .upper{
+        width: 20px;
+        height: 20px
+    }
+    
+    .space{
+        margin-right: 5px;
+    }

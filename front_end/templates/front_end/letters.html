@@ -6,16 +6,42 @@
         {% for letter, upper in letters %}
             {% if letter == "space" %}
                 <div class="ml-2 mr-2"></div>
-            {% else %}
-                <div class="coly" style="letter-spacing: {{letter_spacing}}px">
-                    <div class="letter-container">
-                        <img src="{{ letter }}" 
-                             style="width: {{ upper|yesno:"upper_width,lower_width" }}px; 
-                                    height: {{ upper|yesno:"upper_height,lower_height" }}px; 
-                                    margin-bottom: {{ upper|yesno:"0,"|add:lower_margin_top }}px;">
+            {% elif letter in narrow_list %}
+
+                {% if upper %}
+                    <div class="coly" style="letter-spacing: {{letter_spacing}}px">
+                        <img src="{{ letter }}" style="width: {{ special_width }}px; height: {{ upper_height }}px">
                     </div>
+                {% else %}
+                    <div class="coly">
+                        <img src="{{ letter }}"
+                             style="width: {{ special_width_lower }}px; height: {{ lower_height }}px; margin-top: {{ lower_margin_top }}px;">
+                    </div>
+                {% endif %}
+            {% elif letter in wide_list %}
+                {% if upper %}
+                    <div class="coly">
+                        <img src="{{ letter }}" style="width: {{ wide_width }}px; height: {{ upper_height }}px">
+                    </div>
+                {% else %}
+                    <div class="coly">
+                        <img src="{{ letter }}"
+                             style="width: {{ wide_width_lower }}px; height: {{ lower_height }}px; margin-top: {{ lower_margin_top }}px;">
+                    </div>
+                {% endif %}
+            {% elif upper %}
+                <div class="coly">
+                    <img src="{{ letter }}" style="width: {{ upper_width }}px; height: {{ upper_height }}px">
+                </div>
+            {% else %}
+                <div class="coly">
+                    <img src="{{ letter }}"
+                         style="width: {{ lower_width }}px; height: {{ lower_height }}px; margin-top: {{ lower_margin_top }}px;">
                 </div>
             {% endif %}
         {% endfor %}
     </div>
+
+
+
 {% endblock %}
